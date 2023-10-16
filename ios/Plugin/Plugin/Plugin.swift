@@ -81,6 +81,19 @@ public class FCMPlugin: CAPPlugin, MessagingDelegate {
         }
     }
 
+    @objc func deleteToken(_ call: CAPPluginCall) {
+        // Delete FCM Token on Firebase
+        FirebaseMessaging.Messaging.messaging().deleteData { error in
+        guard let error = error else {
+            print("Delete FCMToken successful!")
+            return
+        }
+        call.reject("Delete FCMToken failed", error.localizedDescription)
+        print("Delete FCMToken failed: \(String(describing: error.localizedDescription))!")
+        }
+        call.resolve();
+    }
+
     @objc func refreshToken(_ call: CAPPluginCall) {
         // Delete FCM Token on Firebase
         FirebaseMessaging.Messaging.messaging().deleteData { error in

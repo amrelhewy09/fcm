@@ -25,7 +25,6 @@ export interface FCMPlugin {
    */
   getToken(): Promise<{ token: string }>;
 
-  
   /**
    * Refresh fcm token to eventually use from a serve
    *
@@ -39,7 +38,10 @@ export interface FCMPlugin {
    * because the native capacitor method, for apple, returns the APN's token
    */
    refreshToken(): Promise<{ token: string }>;
-
+  /**
+   * Delete token from fcm
+   */
+   deleteToken(): Promise<boolean>;
   /**
    * Remove local fcm instance completely
    */

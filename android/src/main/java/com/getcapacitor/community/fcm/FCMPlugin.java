@@ -81,7 +81,14 @@ public class FCMPlugin extends Plugin {
 
         FirebaseMessaging.getInstance().getToken().addOnFailureListener(e -> call.reject("Failed to get FCM registration token", e));
     }
-    
+
+    @PluginMethod()
+    public void deleteToken(final PluginCall call) {
+        FirebaseMessaging.getInstance().deleteToken()
+                         .addOnSuccessListener(a => call.resolve())
+                         .addOnFailureListener(e => call.reject("Failed to delete FCM registration token", e));
+    }
+
     @PluginMethod()
     public void refreshToken(final PluginCall call) {
         FirebaseMessaging.getInstance().deleteToken();
